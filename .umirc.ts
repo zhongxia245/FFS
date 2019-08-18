@@ -4,6 +4,12 @@ import { IConfig } from 'umi-types';
 const config: IConfig = {
   history: 'hash',
   treeShaking: true,
+  copy: [
+    {
+      from: __dirname + '/favicon.png',
+      to: __dirname + '/dist/favicon.png',
+    },
+  ],
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     [
