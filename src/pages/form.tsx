@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Radio, Alert, Button, message, BackTop, Modal } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { withRouter } from 'umi';
@@ -12,6 +12,10 @@ let startTime = 0;
 export default withRouter(({ history }) => {
   const { data, setData }: any = useContext(AppContext);
 
+  useEffect(() => {
+    startTime = Date.now();
+  }, []);
+
   const onSubmit = () => {
     let emptyIndex = -1;
     // 检查是否填完答案
@@ -22,8 +26,6 @@ export default withRouter(({ history }) => {
       }
     }
 
-    let duration = Date.now() - startTime;
-
     if (emptyIndex !== -1) {
       let dom: HTMLElement | null = document.getElementById(`q_${emptyIndex}`);
       if (dom) {
@@ -32,12 +34,15 @@ export default withRouter(({ history }) => {
       }
       message.error('必须答完所有题目');
     } else {
+      // 缓存数据
+      localStorage.setItem('ffs_data', JSON.stringify(data));
+
       let duration = Date.now() - startTime;
       Modal.confirm({
         icon: null,
         width: 300,
         centered: true,
-        content: `您的答题时间为:${duration / 1000}s`,
+        content: `答题时间为：${parseInt(String(duration / 1000), 10)}s`,
         okText: '查看结果',
         cancelText: '取消',
         onOk: () => {
@@ -60,13 +65,11 @@ export default withRouter(({ history }) => {
                 {`Q${index + 1}`}：{item.question}
               </p>
               <Radio.Group
+                value={data[index]}
                 className={styles.group}
                 onChange={(e: RadioChangeEvent) => {
-                  if (!startTime) {
-                    startTime = Date.now();
-                  }
                   let value = e.target.value;
-                  setData({ ...data, [index]: value });
+                  setData({ [index]: value });
                 }}
               >
                 <Radio value="A">A: YES</Radio>

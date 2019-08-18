@@ -5,26 +5,32 @@
 html,
 body,
 #root {
-  height: 100%;
   margin: 0;
+  height: 100%;
 }
 
 html body {
   margin: 0;
-  padding: 15px;
-  font-family: "PingFang SC", Arial, "\5FAE\8F6F\96C5\9ED1", "\5B8B\4F53", simsun, sans-serif;
-  font-size: 14px;
-  max-width: 800px;
   margin: 0 auto;
-}
-
-h1 {
-  font-size: 22px;
+  padding: 15px;
+  max-width: 800px;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  font-family: PingFangSC-Regular;
 }
 
 .ant-modal-confirm-confirm {
   text-align: center !important;
 
+  .ant-modal-confirm-btns {
+    float: none !important;
+    text-align: center !important;
+  }
+}
+
+.ant-modal-confirm-info {
   .ant-modal-confirm-btns {
     float: none !important;
     text-align: center !important;

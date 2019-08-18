@@ -11,12 +11,20 @@ export const AppContextProvider = ({ children }: any) => {
   // 修改状态
   const setData = (data: any) => {
     setState(prevState => {
-      return { ...prevState, data };
+      return { ...prevState, data: { ...prevState.data, ...data } };
     });
   };
 
+  let cacheData = {};
+  try {
+    cacheData = JSON.parse(localStorage.getItem('ffs_data') || '{}');
+  } catch (error) {
+    // tslint:disable-next-line: no-console
+    console.warn(`[WARN]:获取缓存的FFS 表单数据失败`, error);
+  }
+
   const initAppState: IAppContext = {
-    data: {},
+    data: cacheData,
     setData,
   };
   const [state, setState] = useState(initAppState);

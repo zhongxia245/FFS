@@ -1,12 +1,51 @@
-export const TYPES = {
-  A: '凝聚性',
-  B: '接纳性',
-  C: '辨别性',
-  D: '扩展性',
-  E: '保全性',
+export const FFS_TYPES: any = {
+  A: '凝聚性(A)',
+  B: '接纳性(B)',
+  C: '辨别性(C)',
+  D: '扩展性(D)',
+  E: '保全性(E)',
 };
 
-export const QUESTIONS = [
+/**
+ * 管理者可以根据FFS理论的测试结果，可以把员工的性格进一步分为四种类型：
+ * 首先比较 A凝聚性 和 B接纳性 的数值哪一个更高。两数值相等时，算作A更高。
+ * 然后比较 D扩展性 和 E保全性 的数值哪一个更高。两数值相等时，算作E更高。
+ *
+ * 根据上面的两个条件比较，得出以下结论
+ */
+export const FFS_RESULT: any = {
+  AD: {
+    type: 'AD',
+    name: '领导型(Leadership)',
+    desc: '这种类型的人具备精神力量、使命感、决策力和行动力，善于掀起变革、扩大市场的“开路人”',
+  },
+  BD: {
+    type: 'BD',
+    name: '拖船型(Tugboat)',
+    desc:
+      '这种类型的人能够敏锐察觉环境的变化，并积极主动地冲锋陷阵，善于拓展业务、创业事业的“侦查员”',
+  },
+  AE: {
+    type: 'AE',
+    name: '船锚型(Anchor)',
+    desc: '这种类型的人能够忠实于自己的价值标准和规范，是在后方支援事业、维护企业稳定的“坚守人”',
+  },
+  BE: {
+    type: 'BE',
+    name: '管理型(Management)',
+    desc: '这种类型的人富有人情味，能够长期稳定从事一项工作，是所有事业不可或缺的“协调员”',
+  },
+};
+
+// 计算FFS理论的类型
+export const getFFSTypeByScore = (score: any) => {
+  let ffsType = '';
+  ffsType = score.A >= score.B ? 'A' : 'B';
+  ffsType += score.D >= score.E ? 'D' : 'E';
+  return FFS_RESULT[ffsType];
+};
+
+export const QUESTIONS: any[] = [
   { type: 'A', question: '即使是朋友犯了错误也会严厉地批评或指责？' },
   { type: 'A', question: '绝不容忍他人背叛自己，无论对方是谁？' },
   { type: 'A', question: '严格遵守约定的时间并希望他人也能遵守？' },
