@@ -4,6 +4,8 @@ import { IConfig } from 'umi-types';
 const config: IConfig = {
   history: 'hash',
   treeShaking: true,
+  base: '/FFS/',
+  publicPath: '/FFS/',
   copy: [
     {
       from: __dirname + '/favicon.png',

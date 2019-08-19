@@ -1,6 +1,6 @@
 # FFS理论简易测试版
 
-[线上 DEMO](https://ffs.izhongxia.now.sh)
+[线上 DEMO](https://zhongxia245.github.io/FFS/)
 
 **“FFS理论”（Five Factors & Stress）是一种独特的思维方式，它为管理者提供一种充分发挥下属的强项，从而提高团队竞争力的方法。****
 
